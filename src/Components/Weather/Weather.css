@@ -1,0 +1,66 @@
+.weatherWidget {
+    width: 300px;
+    min-height: 250px;
+    margin: 20px;
+    border-radius: 5px;
+    border: 1px solid orange;
+    box-shadow: 10px -2px 20px 2px;
+    text-align: left;
+}
+
+.weatherWidget .clearMe {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.weatherWidget header,
+.weatherWidget footer {
+    padding: 20px 20px 10px 20px;
+    background-color: orange;
+}
+
+.weatherWidget footer {
+    padding-top: 10px;
+}
+
+.weatherWidget header .conditionsWithlocation,
+.weatherWidget section .temperature,
+.weatherWidget section .details {
+    float: left;
+}
+
+.weatherWidget section .temperature,
+.weatherWidget section .details {
+    width: 50%;
+    text-align: center;
+}
+
+.weatherWidget header .icon {
+    float: right;
+}
+
+.weatherWidget header .conditionsWithlocation .location,
+.weatherWidget section .temperature {
+    font-weight: bold;
+}
+
+.weatherWidget section .temperature {
+    font-size: 60px;
+    line-height: 120px;
+}
+
+.weatherWidget section .details {
+    text-align: left;
+    margin-top: 30px;
+    width: 120px;
+    margin-left: 20px;
+}
+
+.weatherWidget section .details > div:first-child {
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+}
