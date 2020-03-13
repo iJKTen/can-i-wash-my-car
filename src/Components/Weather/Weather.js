@@ -10,7 +10,7 @@ const Weather = () => {
         }
         else {
             navigator.geolocation.getCurrentPosition((position) => {
-                fetch("//api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&appid=00a838ee49c51c343d61bf6dd17c4b12")
+                fetch("//api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&appid=" + process.env.REACT_APP_API_KEY)
                 .then((response) => {
                     return response.json();
                 })
