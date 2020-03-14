@@ -1,7 +1,7 @@
 .weatherWidget {
     width: 300px;
     min-height: 250px;
-    margin: 20px;
+    margin: 20px auto;
     border-radius: 5px;
     border: 1px solid orange;
     box-shadow: 10px -2px 20px 2px;
@@ -41,6 +41,10 @@
 
 .weatherWidget header .icon {
     float: right;
+}
+
+.weatherWidget header .conditionsWithlocation .location {
+    font-size: 24px;
 }
 
 .weatherWidget header .conditionsWithlocation .location,

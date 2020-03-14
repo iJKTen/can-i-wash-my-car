@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Weather.css';
+import WeatherComponent from './WeatherComponent';
 
 const Weather = () => {
 
@@ -12,7 +13,7 @@ const Weather = () => {
         }
         else {
             navigator.geolocation.getCurrentPosition((position) => {
-                fetch("//api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&appid=" + process.env.REACT_APP_API_KEY + "&units=metric")
+                fetch(`//api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_API_KEY }&units=imperial`)
                     .then((response) => {
                         return response.json();
                     })
@@ -30,6 +31,14 @@ const Weather = () => {
                 });
         }
     }, []);
+
+    const registerCarWash = () => {
+        let localStorage = window.localStorage;
+        let today = new Date();
+        let todayStr = `${today.getMonth()}/${today.getDay()}/${today.getFullYear()}`;
+        localStorage.setItem('carLastCleaned', todayStr);
+        setCarLastCleanedOn(todayStr);
+    }
 
     let weatherIconUrl = '//openweathermap.org/img/wn/' + today.weather[0].icon + '.png';
     let temperature = Math.floor(today.main.temp);
@@ -49,39 +58,24 @@ const Weather = () => {
         }
     }
 
+    let buttonDiv = <button onClick={registerCarWash}>Washed my Car</button>;
+    if(carLastCleanedOn !== null) {
+        buttonDiv = null;
+    }
+
     return (
         <div>
-            <div className='weatherWidget'>
-                <header>
-                    <div className="conditionsWithlocation">
-                        <div className="location">{today.name}, {today.sys.country}</div>
-                        <div className="conditions">{today.weather[0].description}</div>
-                    </div>
-                    <div className="icon">
-                        <img
-                            src={weatherIconUrl}
-                            alt={today.weather[0].description}
-                            title={today.weather[0].description} />
-                    </div>
-                    <div className="clearMe" />
-                </header>
-                <section>
-                    <div className="temperature">
-                        {temperature}
-                        <span><sup>o</sup>C</span>
-                    </div>
-                    <div className="details">
-                        <div>Details</div>
-                        <div>Feels like <span>{feels_like}<sup>o</sup>C</span></div>
-                        <div>Wind <span>{wind} m/s</span></div>
-                        <div>Humidity <span>{humidity}%</span></div>
-                    </div>
-                    <div className="clearMe" />
-                </section>
-                <footer>
-                    <div>{message}</div>
-                </footer>
-            </div>
+            <WeatherComponent 
+                locationName={today.name}
+                country={today.sys.country}
+                description={today.weather[0].description}
+                weatherIconUrl={weatherIconUrl}
+                temperature={temperature}
+                feelsLike={feels_like}
+                wind={wind}
+                humidity={humidity}
+                message={message} />
+            {buttonDiv}
         </div>
     )
 }
