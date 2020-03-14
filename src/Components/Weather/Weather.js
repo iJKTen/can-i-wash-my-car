@@ -35,7 +35,7 @@ const Weather = () => {
     const registerCarWash = () => {
         let localStorage = window.localStorage;
         let today = new Date();
-        let todayStr = `${today.getMonth()}/${today.getDay()}/${today.getFullYear()}`;
+        let todayStr = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
         localStorage.setItem('carLastCleaned', todayStr);
         setCarLastCleanedOn(todayStr);
     }
@@ -46,21 +46,19 @@ const Weather = () => {
     let wind = Math.floor(today.wind.speed);
     let humidity = Math.floor(today.main.humidity);
     let message = 'You have never cleaned your car.';
-    if (carLastCleanedOn !== null) {
+    let buttonDiv = <button onClick={registerCarWash}>Washed my Car</button>;
+
+    if (carLastCleanedOn) {
         let dt = new Date(carLastCleanedOn);
         let threshold = new Date();
         threshold.setDate(threshold.getDate() - 7);
         if (dt > threshold) {
-            message = 'It\'s been seven days since you washed your car. It\'s dirty';
+            message = 'Don\'t worry your car is clean!';
+            buttonDiv = null;
         }
         else {
-            message = 'Don\'t worry your car is clean!';
+            message = 'It\'s been seven days since you washed your car. It\'s dirty';
         }
-    }
-
-    let buttonDiv = <button onClick={registerCarWash}>Washed my Car</button>;
-    if(carLastCleanedOn !== null) {
-        buttonDiv = null;
     }
 
     return (
