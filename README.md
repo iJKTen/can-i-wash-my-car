@@ -1,5 +1,5 @@
 ## Creating a development environement local file
-Create a file named .env.development.local and add a key named REACT_APP_API_KEY with your open weather API key.
+Create a file named .env.development.local and add a key named REACT_APP_API_KEY with your [open weather API key](https://home.openweathermap.org).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
