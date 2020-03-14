@@ -40,7 +40,7 @@ const Weather = () => {
         setCarLastCleanedOn(todayStr);
     }
 
-    let weatherIconUrl = '//openweathermap.org/img/wn/' + today.weather[0].icon + '.png';
+    let weatherIconUrl = `//openweathermap.org/img/wn/${today.weather[0].icon}.png`;
     let temperature = Math.floor(today.main.temp);
     let feels_like = Math.floor(today.main.feels_like);
     let wind = Math.floor(today.wind.speed);
