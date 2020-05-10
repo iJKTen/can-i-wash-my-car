@@ -1,6 +1,6 @@
 .weatherWidget {
     width: 300px;
-    min-height: 250px;
+    min-height: 242px;
     margin: 20px auto;
     border-radius: 5px;
     border: 1px solid orange;
@@ -25,6 +25,7 @@
 
 .weatherWidget footer {
     padding-top: 10px;
+    text-align: center;
 }
 
 .weatherWidget header .conditionsWithlocation,
@@ -59,7 +60,7 @@
 
 .weatherWidget section .details {
     text-align: left;
-    margin-top: 30px;
+    margin-top: 20px;
     width: 120px;
     margin-left: 20px;
 }
@@ -67,4 +68,9 @@
 .weatherWidget section .details > div:first-child {
     font-weight: bold;
     border-bottom: 1px solid #000;
+}
+
+.weatherWidget section .details span {
+    float: right;
+    display: inline-block;
 }
