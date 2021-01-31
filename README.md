@@ -29,3 +29,7 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Deployment Status
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5c0a3033-4c60-4eb6-a191-d0386dcc1541/deploy-status)](https://app.netlify.com/sites/caniwashmycar/deploys)
