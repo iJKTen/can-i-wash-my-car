@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './Weather.css';
 import WeatherComponent from './WeatherComponent';
+import { useLocalStorage } from '../../hooks';
 
 const Weather = () => {
 
-    const [today, setTodaysWeather] = useState({ weather: [{ main: '', description: '', icon: '' }], main: { temp: '', feels_like: '' }, wind: { speed: '' }, sys: { country: '' } });
-    const [carLastCleanedOn, setCarLastCleanedOn] = useState('');
+    const [today, setTodaysWeather] = useState({
+        weather: [
+            { main: '', description: '', icon: '' }
+        ],
+        main: { temp: '', feels_like: '' },
+        wind: { speed: '' },
+        sys: { country: '' }
+    });
+
+    const [carLastCleaned, setCarLastCleaned] = useLocalStorage('carLastCleaned', '');
 
     useEffect(() => {
         if (!navigator.geolocation) {
@@ -13,31 +22,24 @@ const Weather = () => {
         }
         else {
             navigator.geolocation.getCurrentPosition((position) => {
-                fetch(`//api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_API_KEY }&units=imperial`)
+                fetch(`//api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`)
                     .then((response) => {
                         return response.json();
                     })
                     .then((json) => {
                         setTodaysWeather(json);
-                        let localStorage = window.localStorage;
-                        let lastCleaned = localStorage.getItem('carLastCleaned');
-                        if (lastCleaned !== '') {
-                            setCarLastCleanedOn(lastCleaned);
-                        }
                     });
             },
                 (err) => {
                     console.log("Error getting location");
                 });
         }
-    }, []);
+    }, [carLastCleaned]);
 
     const registerCarWash = () => {
-        let localStorage = window.localStorage;
         let today = new Date();
         let todayStr = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
-        localStorage.setItem('carLastCleaned', todayStr);
-        setCarLastCleanedOn(todayStr);
+        setCarLastCleaned(todayStr);
     }
 
     let weatherIconUrl = `//openweathermap.org/img/wn/${today.weather[0].icon}.png`;
@@ -48,8 +50,8 @@ const Weather = () => {
     let message = 'You have never cleaned your car.';
     let buttonDiv = <button onClick={registerCarWash}>Washed my Car</button>;
 
-    if (carLastCleanedOn) {
-        let dt = new Date(carLastCleanedOn);
+    if (carLastCleaned) {
+        let dt = new Date(carLastCleaned);
         let threshold = new Date();
         threshold.setDate(threshold.getDate() - 7);
         if (dt > threshold) {
@@ -63,7 +65,7 @@ const Weather = () => {
 
     return (
         <div>
-            <WeatherComponent 
+            <WeatherComponent
                 locationName={today.name}
                 country={today.sys.country}
                 description={today.weather[0].description}
