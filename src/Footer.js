@@ -92,7 +92,7 @@ const Footer = () => {
                                 <a
                                     target='_blank'
                                     rel='nofollow noreferrer noopener'
-                                    href='https://Twitter.com/iJKTen'
+                                    href='https://Twitter.com/MyFriendJai'
                                     className='text-sm text-gray-600 hover:text-gray-800'>Twitter</a>
                             </li>
                         </nav>
@@ -108,12 +108,12 @@ const Footer = () => {
                         <a
                             href='https://www.github.com/iJKTen'
                             target='_blank'
-                            rel='nofollow noreferrer'
+                            rel='nofollow noreferrer noopener'
                             className='text-white hover:text-blue-500'>
                             <FontAwesomeIcon icon={['fab', 'github']} />
                         </a>
                         <a
-                            rel='nofollow noreferrer'
+                            rel='nofollow noreferrer noopener'
                             target='_blank'
                             href='https://www.twitter.com/MyFriendJai'
                             className='ml-4 text-white hover:text-blue-500'>
